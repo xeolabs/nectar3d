@@ -5,8 +5,6 @@ Author:		Lindsay Kay
 E-Mail:		lindsay.stanley.kay@gmail.com
 Web:        http://www.neocoders.com/projects/nectar3d
 
-Built at: 	2008-04-01 04:13 NZT
-
 Description
 ===========
 
