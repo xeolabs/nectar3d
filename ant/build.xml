@@ -14,13 +14,17 @@
 
     <target name="clean" description="Prepare for clean build">
         <echo message="Cleaning out dir: ${dist.dir}"/>
+
         <ant antfile="ant/build.xml" dir="${basedir}/framework" target="clean"/>
+
+        <mkdir dir="${dist.dir}"/>
         <delete includeEmptyDirs="true">
             <fileset dir="${dist.dir}" includes="**/*" defaultexcludes="no"/>
         </delete>
 
-
         <ant antfile="ant/build.xml" dir="${basedir}/examples/cubegui" target="clean"/>
+
+        <mkdir dir="${temp.dir}"/>
         <delete includeEmptyDirs="true">
             <fileset dir="${temp.dir}" includes="**/*" defaultexcludes="no"/>
         </delete>
