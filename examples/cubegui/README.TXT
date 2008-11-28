@@ -9,19 +9,13 @@ Description
 ===========
 
 This is an example application built using the Nectar3D 
-scene graph engine.
+scene graph engine. To build it, you must have ANT installed.
 
-Contents
-========
+Initial clean contents
+======================
 
 	ant	
 		ANT build script
-
-	classes
-		Generated class files
-
-	jar 
-		Ant-built CubeGUI JAR
 
 	lib 
 		Libraries
@@ -31,6 +25,15 @@ Contents
 	
 	bin
 		Scripts for running CubeGUI
+
+Building
+========
+
+From the ant directory, type
+
+    ant build
+
+This will create the 'classes' and 'jar' directories.
 
 Running
 ========

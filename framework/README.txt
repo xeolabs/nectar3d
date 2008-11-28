@@ -5,13 +5,26 @@ Lindsay Kay,
 December 2,
 2005
 
-Contents
---------
+Initial clean contents
+======================
 
-classes - compiled class files
-jar - archived class files 
-docs - JavaDocs
-src - Nectar3D source code
-ant - ANT script to build classes, JAR and JavaDocs
-pdf - A guide to Nectar3D
+	ant
+		ANT build script
+
+	src
+		Java source code
+
+	pdf
+		Contains the user's guide
+
+Building
+========
+
+From the ant directory, type
+
+    ant build
+
+This will create the 'classes' and 'jar' directories.
+
+
  
