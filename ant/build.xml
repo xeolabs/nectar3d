@@ -1,0 +1,91 @@
+<project name="Nectar3D" basedir="../" default="dist">
+
+    <!-- Project settings -->
+    <property file="build.properties"/>
+
+
+    <!-- classpath -->
+    <path id="compile.classpath">
+        <pathelement path="${classpath}"/>
+    </path>
+
+    <property name="dist.dir" value="${basedir}/dist"/>
+    <property name="temp.dir" value="${basedir}/temp"/>
+
+    <target name="clean" description="Prepare for clean build">
+        <echo message="Cleaning out dir: ${dist.dir}"/>
+        <delete>
+            <fileset dir="${dist.dir}">
+                <patternset>
+                    <include name="**/*"/>
+                </patternset>
+            </fileset>
+        </delete>
+
+        <delete includeEmptyDirs="yes">
+            <fileset dir="${temp.dir}">
+                <patternset>
+                    <include name="**/*"/>
+                </patternset>
+            </fileset>
+        </delete>
+    </target>
+
+    <!-- Build sumo distribution -->
+
+    <target name="sumo-dist" description="Build sumo distribution" depends="clean">
+
+        <!-- Clean projects -->
+        <ant antfile="ant/build.xml" dir="${basedir}/framework" target="clean"/>
+        <ant antfile="ant/build.xml" dir="${basedir}/examples/cubegui" target="clean"/>
+
+        <!-- Start dist of clean projects -->
+
+        <copy todir="${basedir}/temp/">
+            <fileset dir="${basedir}">
+                <include name="**"/>
+                <exclude name="ant/**"/>
+                <exclude name="temp/**"/>
+                <exclude name="dist/**"/>
+                <exclude name="**/*.iml"/>
+            </fileset>
+        </copy>
+
+        <!-- Build framework -->
+        <ant antfile="ant/build.xml" dir="${basedir}/framework" target="build"/>
+
+        <!-- Distribute JAR to CubeGUI -->
+        <copy todir="${basedir}/temp/examples/cubegui/lib">
+            <fileset dir="${basedir}/framework/jar">
+                <include name="*.jar"/>
+            </fileset>
+        </copy>
+
+        <!-- Framework source distro with bundled JAR -->
+
+        <zip destfile="${basedir}/dist/nectar3d-sumo-1.0.0.zip"
+             basedir="${basedir}/temp"
+             update="true"
+                />
+    </target>
+
+    <!-- Build binary distribution -->
+
+    <target name="binary-dist" description="Build framework binary distribution" depends="clean">
+
+        <!-- Build framework project -->
+        <ant antfile="ant/build.xml" dir="${basedir}/framework" target="build"/>
+
+        <!-- Distribute JAR to dist -->
+        <copy todir="${basedir}/dist">
+            <fileset dir="${basedir}/framework/jar">
+                <include name="*.jar"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="dist" description="Build all distributions" depends="binary-dist, sumo-dist">
+    </target>
+
+</project>
+
