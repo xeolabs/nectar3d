@@ -20,22 +20,17 @@
     <!-- Clear directories for clean build -->
     <target name="clean" description="Prepare for clean build">
         <echo message="Cleaning out dir: ${classes.dir}"/>
-        <delete>
-            <fileset dir="${classes.dir}">
-                <patternset>
-                    <include name="**/*"/>
-                </patternset>
-            </fileset>
+
+        <delete includeEmptyDirs="true">
+            <fileset dir="${classes.dir}" includes="**/*" defaultexcludes="no"/>
         </delete>
 
+
         <echo message="Cleaning out dir: ${jar.dir}"/>
-        <delete>
-            <fileset dir="${jar.dir}">
-                <patternset>
-                    <include name="**/*"/>
-                </patternset>
-            </fileset>
+        <delete includeEmptyDirs="true">
+            <fileset dir="${jar.dir}" includes="**/*" defaultexcludes="no"/>
         </delete>
+
     </target>
 
     <!-- Check timestamp on files -->
