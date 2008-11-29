@@ -1,7 +1,7 @@
 <project name="CubeGUI" basedir="../" default="build">
 
     <!-- Project settings -->
-    <property file="build.properties"/>
+    <property file="${basedir}/ant/build.properties"/>
 
     <!-- Local system paths -->
     <property file="${basedir}/ant/build.properties"/>
@@ -14,7 +14,7 @@
     <!-- classpath -->
     <path id="compile.classpath">
         <pathelement path="${lib.dir}/nectar3d-1.0.0.jar"/>
-        <pathelement path="${classpath}"/>
+        <pathelement path="${basedir}/classes"/>
     </path>
 
     <!-- Clear directories for clean build -->
