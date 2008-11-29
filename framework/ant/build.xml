@@ -1,4 +1,4 @@
-<project name="Nectar3D" basedir="../" default="build">
+<project name="nectar3d" basedir="../" default="build">
 
     <!-- Project settings -->
     <property file="${basedir}/ant/build.properties"/>
