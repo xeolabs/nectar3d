@@ -1,12 +1,12 @@
 <project name="Nectar3D" basedir="../" default="dist">
 
     <!-- Project settings -->
-    <property file="build.properties"/>
+    <property file="${basedir}/ant/build.properties"/>
 
 
     <!-- classpath -->
     <path id="compile.classpath">
-        <pathelement path="${classpath}"/>
+        <pathelement path="${basedir}/classes"/>
     </path>
 
     <property name="dist.dir" value="${basedir}/dist"/>
