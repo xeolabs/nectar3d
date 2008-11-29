@@ -21,12 +21,12 @@
     <target name="clean" description="Prepare for clean build">
         <echo message="Cleaning out dir: ${classes.dir}"/>
 
-               <mkdir dir="${classes.dir}"/>
+        <mkdir dir="${classes.dir}"/>
         <delete includeEmptyDirs="true">
             <fileset dir="${classes.dir}" includes="**/*" defaultexcludes="no"/>
         </delete>
 
-      
+
         <echo message="Cleaning out dir: ${jar.dir}"/>
         <mkdir dir="${jar.dir}"/>
         <delete includeEmptyDirs="true">
