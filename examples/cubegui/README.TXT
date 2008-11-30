@@ -26,8 +26,8 @@ Initial contents before building
 	bin
 		Scripts for running CubeGUI
 
-Building
-========
+How to build
+=============
 
 From the ant directory, type
 
