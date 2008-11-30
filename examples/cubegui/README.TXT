@@ -11,8 +11,8 @@ Description
 This is an example application built using the Nectar3D 
 scene graph engine. To build it, you must have ANT installed.
 
-Initial clean contents
-======================
+Initial contents before building
+=================================
 
 	ant	
 		ANT build script
