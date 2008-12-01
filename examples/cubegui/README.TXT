@@ -44,6 +44,6 @@ For Linux/UNIX:
 
 For Windows:
 
-	From the bin directory execute run.bat
+	From the bin directory execute run.bat   
 
 
