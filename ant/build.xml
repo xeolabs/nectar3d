@@ -54,19 +54,25 @@
         <!-- Build framework -->
         <ant antfile="ant/build.xml" dir="${basedir}/framework" target="build"/>
 
-        <!-- Distribute JAR to CubeGUI -->
+        <!-- Distribute JAR to example -->
         <copy todir="${basedir}/temp/examples/cubegui/lib">
             <fileset dir="${basedir}/framework/jar">
                 <include name="*.jar"/>
             </fileset>
         </copy>
 
-        <!-- Framework source distro with bundled JAR -->
+        <!-- Build example project -->
+        <ant antfile="ant/build.xml" dir="${basedir}/temp/examples/cubegui" target="build"/>
 
-        <zip destfile="${basedir}/dist/nectar3d-sumo-snapshot.zip" basedir="${basedir}/temp"/>
-        <tar destfile="${basedir}/dist/nectar3d-sumo-snapshot.tar" basedir="${basedir}/temp"/>
-        <gzip destfile="${basedir}/dist/nectar3d-sumo-snapshot.tar.gz" src="${basedir}/dist/nectar3d-sumo-snapshot.tar"/>
-        <bzip2 src="${basedir}/dist/nectar3d-sumo-snapshot.tar" destfile="${basedir}/dist/nectar3d-sumo-snapshot.tar.bz2"/>
+
+        <!-- Distribute -->
+
+        <zip destfile="${basedir}/dist/nectar3d-sumo-${project.version}.zip" basedir="${basedir}/temp"/>
+        <tar destfile="${basedir}/dist/nectar3d-sumo-${project.version}.tar" basedir="${basedir}/temp"/>
+        <gzip destfile="${basedir}/dist/nectar3d-sumo-${project.version}.tar.gz"
+              src="${basedir}/dist/nectar3d-sumo-${project.version}.tar"/>
+        <bzip2 src="${basedir}/dist/nectar3d-sumo-${project.version}.tar"
+               destfile="${basedir}/dist/nectar3d-sumo-${project.version}.tar.bz2"/>
     </target>
 
     <!-- Build binary distribution -->

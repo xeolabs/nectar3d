@@ -13,7 +13,7 @@
 
     <!-- classpath -->
     <path id="compile.classpath">
-        <pathelement path="${lib.dir}/nectar3d-1.0.0.jar"/>
+        <pathelement path="${lib.dir}/nectar3d-${project.version}.jar"/>
         <pathelement path="${basedir}/classes"/>
     </path>
 
@@ -58,7 +58,7 @@
         </javac>
 
         <echo message="Creating JAR file in dir: ${jar.dir}"/>
-        <jar destfile="${jar.dir}/${project.distname}-${project.version}.jar" basedir="${classes.dir}" includes="**"
+        <jar destfile="${jar.dir}/cubegui-${project.version}.jar" basedir="${classes.dir}" includes="**"
              excludes="">
             <manifest>
                 <attribute name="Author" value="${author.name}"/>
@@ -75,22 +75,6 @@
 
     </target>
 
-    <!-- Make documentation -->
-    <target name="javadocs">
-        <echo message="Creating JavaDocs in dir: ${docs.dir}"/>
 
-        <javadoc packagenames="${project.packagenames}"
-                 sourcepath="${src.dir}"
-                 destdir="${docs.dir}"
-                 author="true"
-                 version="true"
-                 private="true"
-                 use="true"
-                 doctitle="${project.title} Version ${project.version} Documentation"
-                 windowtitle="${project.title} Documentation"
-                 bottom="Copyright (C); 2006 ${company.name}. All Rights Reserved.">
-            <classpath refid="compile.classpath"/>
-        </javadoc>
-    </target>
 </project>
 
