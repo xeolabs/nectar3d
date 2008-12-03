@@ -63,10 +63,10 @@
 
         <!-- Framework source distro with bundled JAR -->
 
-        <zip destfile="${basedir}/dist/nectar3d-sumo-1.0.0.zip" basedir="${basedir}/temp"/>
-        <tar destfile="${basedir}/dist/nectar3d-sumo-1.0.0.tar" basedir="${basedir}/temp"/>
-        <gzip destfile="${basedir}/dist/nectar3d-sumo-1.0.0.tar.gz" src="${basedir}/dist/nectar3d-sumo-1.0.0.tar"/>
-        <bzip2 src="${basedir}/dist/nectar3d-sumo-1.0.0.tar" destfile="${basedir}/dist/nectar3d-sumo-1.0.0.tar.bz2"/>
+        <zip destfile="${basedir}/dist/nectar3d-sumo-snapshot.zip" basedir="${basedir}/temp"/>
+        <tar destfile="${basedir}/dist/nectar3d-sumo-snapshot.tar" basedir="${basedir}/temp"/>
+        <gzip destfile="${basedir}/dist/nectar3d-sumo-snapshot.tar.gz" src="${basedir}/dist/nectar3d-sumo-snapshot.tar"/>
+        <bzip2 src="${basedir}/dist/nectar3d-sumo-snapshot.tar" destfile="${basedir}/dist/nectar3d-sumo-snapshot.tar.bz2"/>
     </target>
 
     <!-- Build binary distribution -->
