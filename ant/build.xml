@@ -172,7 +172,7 @@
 
     <!-- This target is for Hudson, whose environment has ANT with the required Antelope libs
     -->
-    <target name="hudson-dist">
+    <target name="hudson-dist" depends="dist">
         <property environment="env"/>
         <echo message="${env.BUILD_TAG}"/>
 
