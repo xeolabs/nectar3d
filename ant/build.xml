@@ -3,6 +3,9 @@
     <!-- Project settings -->
     <property file="${basedir}/ant/build.properties"/>
 
+    <!-- Version name is name of container directory, ie. "trunk", "rev1.0" etc. -->
+    <dirname property="pdir" file="build.xml"/>
+    <basename property="project.version" file="${pdir}"/>
 
     <!-- classpath -->
     <path id="compile.classpath">
@@ -15,82 +18,161 @@
     <target name="clean" description="Prepare for clean build">
         <echo message="Cleaning out dir: ${dist.dir}"/>
 
+        <!-- Clean framework -->
+
         <ant antfile="ant/build.xml" dir="${basedir}/framework" target="clean"/>
 
-        <mkdir dir="${dist.dir}"/>
-        <delete includeEmptyDirs="true">
-            <fileset dir="${dist.dir}" includes="**/*" defaultexcludes="no"/>
-        </delete>
+        <!-- Clean example -->
 
         <ant antfile="ant/build.xml" dir="${basedir}/examples/cubegui" target="clean"/>
+
+        <!-- Clean temp dir -->
 
         <mkdir dir="${temp.dir}"/>
         <delete includeEmptyDirs="true">
             <fileset dir="${temp.dir}" includes="**/*" defaultexcludes="no"/>
         </delete>
 
+        <!-- Clean dist target dir -->
+
+        <mkdir dir="${dist.dir}"/>
+        <delete includeEmptyDirs="true">
+            <fileset dir="${dist.dir}" includes="**/*" defaultexcludes="no"/>
+        </delete>
     </target>
 
-    <!-- Build sumo distribution -->
+    <!-- Build distributions -->
 
-    <target name="sumo-dist" description="Build sumo distribution" depends="clean">
+    <target name="dist" description="Build sumo distribution" depends="clean">
 
-        <!-- Clean projects -->
-        <ant antfile="ant/build.xml" dir="${basedir}/framework" target="clean"/>
-        <ant antfile="ant/build.xml" dir="${basedir}/examples/cubegui" target="clean"/>
+        <!-- Prepare dist dirs -->
 
-        <!-- Start dist of clean projects -->
+        <mkdir dir="${temp.dir}/nectar3d"/>
+        <mkdir dir="${temp.dir}/nectar3d/jar"/>
+        <mkdir dir="${temp.dir}/nectar3d/pdf"/>
 
-        <copy todir="${basedir}/temp/">
-            <fileset dir="${basedir}">
-                <include name="**"/>
-                <exclude name="ant/**"/>
-                <exclude name="temp/**"/>
-                <exclude name="dist/**"/>
-                <exclude name="**/*.iml"/>
-            </fileset>
-        </copy>
+        <mkdir dir="${temp.dir}/examples"/>
+        <mkdir dir="${temp.dir}/examples/cubegui/ant"/>
+        <mkdir dir="${temp.dir}/examples/cubegui/lib"/>
+        <mkdir dir="${temp.dir}/examples/cubegui/src"/>
+        <mkdir dir="${temp.dir}/examples/cubegui/jar"/>
+        <mkdir dir="${temp.dir}/examples/cubegui/bin"/>
 
         <!-- Build framework -->
         <ant antfile="ant/build.xml" dir="${basedir}/framework" target="build"/>
 
-        <!-- Distribute JAR to example -->
+        <!-- Copy JAR over to example -->
+        <copy todir="${basedir}/examples/cubegui/lib">
+            <fileset dir="${basedir}/framework/jar">
+                <include name="*.jar"/>
+            </fileset>
+        </copy>
+
+        <!-- Build example -->
+        <ant antfile="ant/build.xml" dir="${basedir}/examples/cubegui" target="build"/>
+
+
+        <!-- Distribute framework README -->
+        <!--
+        <copy todir="${basedir}/temp/nectar3d/">
+            <fileset dir="${basedir}/nectar3d">
+                <include name="README.txt"/>
+            </fileset>
+        </copy>
+            -->
+
+        <!-- Distribute framework JAR -->
+        <copy todir="${basedir}/temp/nectar3d/jar">
+            <fileset dir="${basedir}/framework/jar">
+                <include name="*.jar"/>
+            </fileset>
+        </copy>
+
+        <!-- Distribute framework docs -->
+        <copy todir="${basedir}/temp/nectar3d/pdf">
+            <fileset dir="${basedir}/framework/pdf">
+                <include name="*.pdf"/>
+            </fileset>
+        </copy>
+
+        <!-- Distribute framework JAR to example dist -->
         <copy todir="${basedir}/temp/examples/cubegui/lib">
             <fileset dir="${basedir}/framework/jar">
                 <include name="*.jar"/>
             </fileset>
         </copy>
 
-        <!-- Build example project -->
-        <ant antfile="ant/build.xml" dir="${basedir}/temp/examples/cubegui" target="build"/>
+        <!-- Distribute example README -->
+        <copy todir="${basedir}/temp/examples/cubegui/">
+            <fileset dir="${basedir}/examples/cubegui">
+                <include name="README.txt"/>
+            </fileset>
+        </copy>
+
+        <!-- Distribute example src -->
+        <copy todir="${basedir}/temp/examples/cubegui/src">
+            <fileset dir="${basedir}/examples/cubegui/src">
+                <!-- <include name="*.jar"/> -->
+            </fileset>
+        </copy>
 
 
-        <!-- Distribute -->
+        <!-- Distribute example ANT -->
+        <copy todir="${basedir}/temp/examples/cubegui/ant">
+            <fileset dir="${basedir}/examples/cubegui/ant">
+                <!-- <include name="*.jar"/> -->
+            </fileset>
+        </copy>
 
-        <zip destfile="${basedir}/dist/nectar3d-sumo-${project.version}.zip" basedir="${basedir}/temp"/>
-        <tar destfile="${basedir}/dist/nectar3d-sumo-${project.version}.tar" basedir="${basedir}/temp"/>
-        <gzip destfile="${basedir}/dist/nectar3d-sumo-${project.version}.tar.gz"
-              src="${basedir}/dist/nectar3d-sumo-${project.version}.tar"/>
-        <bzip2 src="${basedir}/dist/nectar3d-sumo-${project.version}.tar"
-               destfile="${basedir}/dist/nectar3d-sumo-${project.version}.tar.bz2"/>
-    </target>
-
-    <!-- Build binary distribution -->
-
-    <target name="binary-dist" description="Build framework binary distribution" depends="clean">
-
-        <!-- Build framework project -->
-        <ant antfile="ant/build.xml" dir="${basedir}/framework" target="build"/>
-
-        <!-- Distribute JAR to dist -->
-        <copy todir="${basedir}/dist">
-            <fileset dir="${basedir}/framework/jar">
+        <!-- Distribute example JAR -->
+        <copy todir="${basedir}/temp/examples/cubegui/jar">
+            <fileset dir="${basedir}/examples/cubegui/jar">
                 <include name="*.jar"/>
             </fileset>
         </copy>
+
+        <!-- Distribute example bin -->
+        <copy todir="${basedir}/temp/examples/cubegui/bin">
+            <fileset dir="${basedir}/examples/cubegui/bin">
+                <include name="*.sh"/>
+                <include name="*.bat"/>
+            </fileset>
+        </copy>
+
+        <!-- Distribute framework -->
+
+        <zip destfile="${basedir}/dist/nectar3d-${project.version}.zip"
+             basedir="${basedir}/temp/nectar3d"/>
+
+        <tar destfile="${basedir}/dist/nectar3d-${project.version}.tar"
+             basedir="${basedir}/temp/nectar3d"/>
+
+        <gzip destfile="${basedir}/dist/nectar3d-${project.version}.tar.gz"
+              src="${basedir}/dist/nectar3d-${project.version}.tar"/>
+
+        <bzip2 src="${basedir}/dist/nectar3d-${project.version}.tar"
+               destfile="${basedir}/dist/nectar3d-${project.version}.tar.bz2"/>
+
+        <!-- Distribute cubegui -->
+
+        <zip destfile="${basedir}/dist/cubegui-${project.version}.zip"
+             basedir="${basedir}/temp/examples/cubegui"/>
+
+        <tar destfile="${basedir}/dist/cubegui-${project.version}.tar"
+             basedir="${basedir}/temp/examples/cubegui"/>
+
+        <gzip destfile="${basedir}/dist/cubegui-${project.version}.tar.gz"
+              src="${basedir}/dist/cubegui-${project.version}.tar"/>
+
+        <bzip2 src="${basedir}/dist/cubegui-${project.version}.tar"
+               destfile="${basedir}/dist/cubegui-${project.version}.tar.bz2"/>
+
+
     </target>
 
-    <target name="dist" description="Build all distributions" depends="binary-dist, sumo-dist">
+    <target name="hudson-dist">
+        <property environment="env"/>
+        <echo message="${env.BUILD_TAG}"/>
     </target>
 
 </project>
