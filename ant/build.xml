@@ -180,8 +180,7 @@
 
         <!-- Post info on new build artifacts to the catalogue
         -->
-        <post to="http:/localhost:8888/buildcat"
-              verbose="true">
+        <post to="http:/localhost:8888/buildcat" verbose="true">
             <prop name="build-tag" value="${env.BUILD_TAG}"/>
             <prop name="Description" value="Nectar3D Framework JAR and user's guide"/>
             <prop name="artifacts" value="nectar3d-${project.version}.zip, nectar3d-${project.version}.tar, nectar3d-${project.version}.tar.gz, nectar3d-${project.version}.tar.bz2"/>

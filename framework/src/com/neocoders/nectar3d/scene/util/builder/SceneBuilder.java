@@ -95,12 +95,14 @@ public class SceneBuilder {
     }
 
     /** Open an environment element */
-    public void openEnvironment() {
+    public SceneBuilder openEnvironment() {
         tryOpen(builder.openEnvironment());
+        return this;
     }
 
-    public void openSwitch() {
+    public SceneBuilder openSwitch() {
         tryOpen(builder.openSwitch());
+        return this;
     }
 
     /** Convenience method, sets current builder state to given, only if the given state is not null */
@@ -119,14 +121,16 @@ public class SceneBuilder {
      * @param dir direction of lightsource from origin
      * @param color color of light source
      */
-    public void addLightSource(Vector3 dir, Color color) {
+    public SceneBuilder addLightSource(Vector3 dir, Color color) {
         printDebugMessage("adding a lightsource");
         builder.addLightSource(dir, color);
+        return this;
     }
 
     /** Open a geometry element */
-    public void openGeometry() {
+    public SceneBuilder openGeometry() {
         tryOpen(builder.openGeometry());
+        return this;
     }
 
     /**
@@ -134,9 +138,10 @@ public class SceneBuilder {
      * Note that a face must be closed, ie. the last vertex index
      * must equal the first vertex
      */
-    public void addFace() {
+    public SceneBuilder addFace() {
         printDebugMessage("adding a face");
         builder.addFace();
+        return this;
     }
 
     /**
@@ -145,9 +150,10 @@ public class SceneBuilder {
      * @param y y-component of vertex
      * @param z z-component of vertex
      */
-    public void addVertex(double x, double y, double z) {
+    public SceneBuilder addVertex(double x, double y, double z) {
         printDebugMessage("adding a vertex");
         builder.addVertex(x, y, z);
+        return this;
     }
 
     /**
@@ -155,9 +161,10 @@ public class SceneBuilder {
      * previously added to the element. An error is logged if the index is out of range of vertices previously added.
      * @param index the vertex index
      */
-    public void addVertexIndex(int index) {
+    public SceneBuilder addVertexIndex(int index) {
         printDebugMessage("adding vertex index");
         builder.addVertexIndex(index);
+        return this;
     }
 
     /**
@@ -165,35 +172,39 @@ public class SceneBuilder {
      * courier, filled with black, with no offset from the current
      * coordinate space origin.
      */
-    public void openLabel() {
+    public SceneBuilder openLabel() {
         tryOpen(builder.openLabel());
+        return this;
     }
 
     /**
      * Set text for the currently open element
      * @param text text for currently open element
      */
-    public void setText(String text) {
+    public SceneBuilder setText(String text) {
         printDebugMessage("setting text");
         builder.setText(text);
+        return this;
     }
 
     /**
      * Set offset for the currently open element
      * @param offset offset for currently open element
      */
-    public void setOffset(Point3 offset) {
+    public SceneBuilder setOffset(Point3 offset) {
         printDebugMessage("setting an offet");
         builder.setOffset(offset);
+        return this;
     }
 
     /**
      * Set font for currently open element
      * @param font font for element
      */
-    public void setFont(Font font) {
+    public SceneBuilder setFont(Font font) {
         printDebugMessage("setting font");
         builder.setFont(font);
+        return this;
     }
 
     /**
@@ -202,16 +213,18 @@ public class SceneBuilder {
      * @param ySize size of box on y-axis
      * @param zSize size of box on z-axis
      */
-    public void openBox(double xSize, double ySize, double zSize) {
+    public SceneBuilder openBox(double xSize, double ySize, double zSize) {
         tryOpen(builder.openBox(xSize, ySize, zSize));
+        return this;
     }
 
     /**
      * Open an interpolator scene element to interpolate a selected attribute of the currently open element
-     * @param attStringSelector selects an attribute of the element to interpolate
+     * @param attrStringSelector selects an attribute of the element to interpolate
      */
-    public void openInterpolator(int attrStringSelector) {
+    public SceneBuilder openInterpolator(int attrStringSelector) {
         tryOpen(builder.openInterpolator(attrStringSelector));
+        return this;
     }
 
     /**
@@ -219,9 +232,10 @@ public class SceneBuilder {
      * @param instant time stamp for keyframe in milliseconds
      * @param value for keyframe
      */
-    public void addKeyFrame(long instant, double value) {
+    public SceneBuilder addKeyFrame(long instant, double value) {
         printDebugMessage("adding key frame");
         builder.addKeyFrame(instant, value);
+        return this;
     }
 
     /**
@@ -231,116 +245,129 @@ public class SceneBuilder {
      * @param fog specifies if colors of visible sub-elements of layer are fogged to help simulate depth when rendered
      * @param shade specifies if visible sub-elements of layer are shaded (where applicable) when rendered
      */
-    public void openLayer(String name, boolean depthSort, boolean fog, boolean shade) {
+    public SceneBuilder openLayer(String name, boolean depthSort, boolean fog, boolean shade) {
         tryOpen(builder.openLayer(name, depthSort, fog, shade));
+        return this;
     }
 
     /** Opens a transform group scene element */
-    public void openTransformGroup() {
+    public SceneBuilder openTransformGroup() {
         tryOpen(builder.openTransformGroup());
+        return this;
     }
 
     /**
      * Add x-axis rotation transformation to currently open scene element
-     * @param value for x-axis rotation attribute, in degrees
+     * @param degrees for x-axis rotation attribute, in degrees
      */
-    public void rotateX(double degrees) {
+    public SceneBuilder rotateX(double degrees) {
         printDebugMessage("rotating about x");
         builder.rotateX(degrees);
+        return this;
     }
 
     /**
      * Add y-axis rotation transformation to currently open scene element
-     * @param value for y-axis rotation attribute, in degrees
+     * @param degrees for y-axis rotation attribute, in degrees
      */
-    public void rotateY(double degrees) {
+    public SceneBuilder rotateY(double degrees) {
         printDebugMessage("rotating about y");
         builder.rotateY(degrees);
+        return this;
     }
 
     /**
      * Add z-axis rotation transformation to currently open scene element
-     * @param value for z-axis rotation attribute, in degrees
+     * @param degrees for z-axis rotation attribute, in degrees
      */
-    public void rotateZ(double degrees) {
+    public SceneBuilder rotateZ(double degrees) {
         printDebugMessage("rotating about z");
         builder.rotateZ(degrees);
+        return this;
     }
 
     /**
      * Add translation transformation to currently open scene element
-     * @param value for x-axis translation attribute
-     * @param value for y-axis translation attribute
-     * @param value for z-axis translation attribute
+     * @param x for x-axis translation attribute
+     * @param y for y-axis translation attribute
+     * @param z for z-axis translation attribute
      */
-    public void translate(double x, double y, double z) {
+    public SceneBuilder translate(double x, double y, double z) {
         printDebugMessage("translating");
         builder.translate(x, y, z);
+        return this;
     }
 
     /**
      * Add scale transformation to currently open scene element
-     * @param value for x-axis scale attribute
-     * @param value for y-axis scale attribute
-     * @param value for z-axis scale attribute
+     * @param x for x-axis scale attribute
+     * @param y for y-axis scale attribute
+     * @param z for z-axis scale attribute
      */
-    public void scale(double x, double y, double z) {
+    public SceneBuilder scale(double x, double y, double z) {
         printDebugMessage("scaling");
         builder.scale(x, y, z);
+        return this;
     }
 
     /** Open a material properties scene element */
-    public void openAppearance() {
+    public SceneBuilder openAppearance() {
         printDebugMessage("appearance");
         tryOpen(builder.openAppearance());
+        return this;
     }
 
     /**
      * Set fill color for currently open scene element
      * @param fillColor the fill color
      */
-    public void setFillColor(Color fillColor) {
+    public SceneBuilder setFillColor(Color fillColor) {
         printDebugMessage("setting fill color");
         builder.setFillColor(fillColor);
+        return this;
     }
 
     /**
      * Set edge color for currently open scene element
      * @param edgeColor the edge color
      */
-    public void setEdgeColor(Color edgeColor) {
+    public SceneBuilder setEdgeColor(Color edgeColor) {
         printDebugMessage("setting edge color");
         builder.setEdgeColor(edgeColor);
+        return this;
     }
 
     /**
      * Set fill color for when currently open scene element is highlighted
      * @param fillColor the fill color
      */
-    public void setHighlightFillColor(Color fillColor) {
+    public SceneBuilder setHighlightFillColor(Color fillColor) {
         printDebugMessage("setting highlighted fill color");
         builder.setHighlightFillColor(fillColor);
+        return this;
     }
 
     /**
      * Set edge color for when currently open scene element is highlighted
      * @param edgeColor the edge color
      */
-    public void setHighlightEdgeColor(Color edgeColor) {
+    public SceneBuilder setHighlightEdgeColor(Color edgeColor) {
         printDebugMessage("setting highlighted edge color");
         builder.setHighlightEdgeColor(edgeColor);
+        return this;
     }
 
     /**
      * Open a name scene element
      * @param selector identifier for the Name element
      */
-    public void openName(Selector selector) {
+    public SceneBuilder openName(Selector selector) {
         tryOpen(builder.openName(selector));
+        return this;
     }
 
     /** Close and return the currently open scene element */
-    public SceneElement close() {
+    public SceneBuilder close() {
         if (toDebug) {
             debugIndent--;
             printDebugMessage("closed " + builder.getDescription());
@@ -349,10 +376,10 @@ public class SceneBuilder {
         AbstractBuilder test = builder.close();
         if (test == null) {
             errorHandler.handleError("unexpected close");
-            return new SceneElement(); // recover
+            return this; // recover
         }
         builder = test;
-        return closed.getElement();
+        return this;
     }
 
     /**
