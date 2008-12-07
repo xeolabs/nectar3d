@@ -10,7 +10,7 @@
     <!-- classpath -->
     <path id="compile.classpath">
         <pathelement path="${basedir}/classes"/>
-         <pathelement path="${basedir}/lib/"/>
+        <pathelement path="${basedir}/lib/"/>
     </path>
 
     <property name="dist.dir" value="${basedir}/dist"/>
@@ -103,6 +103,8 @@
             </fileset>
         </copy>
 
+
+
         <!-- Distribute example README -->
         <copy todir="${basedir}/temp/examples/cubegui/">
             <fileset dir="${basedir}/examples/cubegui">
@@ -125,12 +127,15 @@
             </fileset>
         </copy>
 
-        <!-- Distribute example JAR -->
+        <!-- Distribute CubeGUI JAR -->
         <copy todir="${basedir}/temp/examples/cubegui/jar">
             <fileset dir="${basedir}/examples/cubegui/jar">
                 <include name="*.jar"/>
             </fileset>
         </copy>
+
+
+
 
         <!-- Distribute example bin -->
         <copy todir="${basedir}/temp/examples/cubegui/bin">
@@ -168,7 +173,17 @@
         <bzip2 src="${basedir}/dist/cubegui-${project.version}.tar"
                destfile="${basedir}/dist/cubegui-${project.version}.tar.bz2"/>
 
+          <copy todir="${basedir}/dist">
+            <fileset dir="${basedir}/framework/jar">
+                <include name="*.jar"/>
+            </fileset>
+        </copy>
 
+           <copy todir="${basedir}/dist">
+            <fileset dir="${basedir}/examples/cubegui/jar">
+                <include name="*.jar"/>
+            </fileset>
+        </copy>
     </target>
 
     <!-- This target is for Hudson, whose environment has ANT with the required Antelope libs
@@ -181,8 +196,6 @@
         <taskdef name="post"
                  classname="ise.antelope.tasks.PostTask"
                  classpath="${basedir}/lib/AntelopeTasks_3.5.0.jar"/>
-
-    
 
 
         <!-- Post info on new build artifacts to the catalogue
