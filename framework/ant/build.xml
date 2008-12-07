@@ -9,7 +9,9 @@
     <property name="lib.dir" value="${basedir}/lib"/>
     <property name="classes.dir" value="${basedir}/classes"/>
     <property name="jar.dir" value="${basedir}/jar"/>
+    <property name="guide.dir" value="${basedir}/guide"/>
     <property name="docs.dir" value="${basedir}/docs"/>
+    <property name="temp.dir" value="${basedir}/temp"/>
 
     <!-- classpath -->
     <path id="compile.classpath">
@@ -36,6 +38,8 @@
         <delete includeEmptyDirs="true">
             <fileset dir="${jar.dir}" includes="**/*" defaultexcludes="no"/>
         </delete>
+
+
     </target>
 
     <!-- Check timestamp on files -->
@@ -52,6 +56,25 @@
                 </patternset>
             </fileset>
         </copy>
+    </target>
+
+    <!-- Make guidebook -->
+    <target name="guidebook">
+         <echo message="Cleaning out dir: ${temp.dir}"/>
+        <mkdir dir="${temp.dir}"/>
+        <delete includeEmptyDirs="true">
+            <fileset dir="${temp.dir}" includes="**/*" defaultexcludes="no"/>
+        </delete>
+        <echo message="Creating guide book in dir: ${guide.dir}"/>
+        <taskdef name="latex" classname="de.dokutransdata.antlatex.LaTeX"
+                 classpath="${basedir}/lib/ant_latex_0.0.9_1.jar"/>
+
+        <latex latexfile="${basedir}/guide/nectar3dguide.tex"
+               verbose="on"
+               clean="on"
+               pdftex="on"
+               workingDir="${basedir}/temp"
+                />
     </target>
 
     <!-- Normal build -->

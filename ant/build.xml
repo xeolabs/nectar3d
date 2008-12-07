@@ -10,6 +10,7 @@
     <!-- classpath -->
     <path id="compile.classpath">
         <pathelement path="${basedir}/classes"/>
+         <pathelement path="${basedir}/lib/"/>
     </path>
 
     <property name="dist.dir" value="${basedir}/dist"/>
@@ -49,7 +50,7 @@
 
         <mkdir dir="${temp.dir}/nectar3d"/>
         <mkdir dir="${temp.dir}/nectar3d/jar"/>
-        <mkdir dir="${temp.dir}/nectar3d/pdf"/>
+        <mkdir dir="${temp.dir}/nectar3d/guide"/>
 
         <mkdir dir="${temp.dir}/examples"/>
         <mkdir dir="${temp.dir}/examples/cubegui/ant"/>
@@ -89,8 +90,8 @@
         </copy>
 
         <!-- Distribute framework docs -->
-        <copy todir="${basedir}/temp/nectar3d/pdf">
-            <fileset dir="${basedir}/framework/pdf">
+        <copy todir="${basedir}/temp/nectar3d/guide">
+            <fileset dir="${basedir}/framework/guide">
                 <include name="*.pdf"/>
             </fileset>
         </copy>
@@ -176,15 +177,22 @@
         <property environment="env"/>
         <echo message="${env.BUILD_TAG}"/>
 
-        <taskdef name="post" classname="ise.antelope.tasks.PostTask"/>
+
+        <taskdef name="post"
+                 classname="ise.antelope.tasks.PostTask"
+                 classpath="${basedir}/lib/AntelopeTasks_3.5.0.jar"/>
+
+    
+
 
         <!-- Post info on new build artifacts to the catalogue
-        -->
+
         <post to="http:/localhost:8888/buildcat" verbose="true">
             <prop name="build-tag" value="${env.BUILD_TAG}"/>
             <prop name="Description" value="Nectar3D Framework JAR and user's guide"/>
             <prop name="artifacts" value="nectar3d-${project.version}.zip, nectar3d-${project.version}.tar, nectar3d-${project.version}.tar.gz, nectar3d-${project.version}.tar.bz2"/>
         </post>
+        -->
     </target>
 
 </project>
