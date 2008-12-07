@@ -184,6 +184,12 @@
                 <include name="*.jar"/>
             </fileset>
         </copy>
+
+          <copy todir="${basedir}/dist">
+            <fileset dir="${basedir}/framework/guide/">
+                <include name="*.pdf"/>
+            </fileset>
+        </copy>
     </target>
 
     <!-- This target is for Hudson, whose environment has ANT with the required Antelope libs
