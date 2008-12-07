@@ -10,6 +10,7 @@
     <property name="classes.dir" value="${basedir}/classes"/>
     <property name="jar.dir" value="${basedir}/jar"/>
     <property name="guide.dir" value="${basedir}/guide"/>
+    <property name="pdf.dir" value="${basedir}/pdf"/>
     <property name="docs.dir" value="${basedir}/docs"/>
     <property name="temp.dir" value="${basedir}/temp"/>
 
@@ -60,20 +61,26 @@
 
     <!-- Make guidebook -->
     <target name="guidebook">
-         <echo message="Cleaning out dir: ${temp.dir}"/>
+        <echo message="Cleaning out dir: ${temp.dir}"/>
         <mkdir dir="${temp.dir}"/>
+
+        <!-- Delete guide book -->
         <delete includeEmptyDirs="true">
-            <fileset dir="${temp.dir}" includes="**/*" defaultexcludes="no"/>
+            <fileset dir="${basedir}/guide">
+                <include name="*.pdf"/>
+            </fileset>
+            <fileset dir="${temp.dir}" includes="**/*.pdf"/>
         </delete>
+
+        <!-- Process LaTEX into guide book -->
         <echo message="Creating guide book in dir: ${guide.dir}"/>
         <taskdef name="latex" classname="de.dokutransdata.antlatex.LaTeX"
                  classpath="${basedir}/lib/ant_latex_0.0.9_1.jar"/>
-
         <latex latexfile="${basedir}/guide/nectar3dguide.tex"
                verbose="on"
                clean="on"
                pdftex="on"
-               workingDir="${basedir}/temp"
+               workingDir="${basedir}/guide"
                 />
     </target>
 
