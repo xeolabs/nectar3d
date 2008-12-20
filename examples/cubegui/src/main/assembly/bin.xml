@@ -18,19 +18,15 @@
             <directory>bin</directory>
             <outputDirectory>bin</outputDirectory>
         </fileSet>
-        <!--<fileSet>-->
-            <!--<directory>resources</directory>-->
-            <!--<outputDirectory>resources</outputDirectory>-->
-        <!--</fileSet>-->
     </fileSets>
-    <!--<dependencySets>-->
-        <!--<dependencySet>-->
-            <!--<useTransitiveDependencies/>-->
-            <!--<outputDirectory>lib</outputDirectory>-->
-            <!--<includes/>-->
-            <!--<excludes/>-->
-        <!--</dependencySet>-->
-    <!--</dependencySets>-->
+    <dependencySets>
+        <dependencySet>
+            <useTransitiveDependencies/>
+            <outputDirectory>lib</outputDirectory>
+            <includes/>
+            <excludes/>
+        </dependencySet>
+    </dependencySets>
 
 </assembly>
 
