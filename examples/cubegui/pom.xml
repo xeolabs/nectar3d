@@ -9,12 +9,12 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <packaging></packaging>
     <name>CubeGUI</name>
-    <artifactId>cubegui</artifactId>
+    <artifactId>nectar3d-cubegui</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
 
     <build>
-        <finalName>cubegui</finalName>
+        <finalName>nectar3d-cubegui</finalName>
 
         <plugins>
             <plugin>
