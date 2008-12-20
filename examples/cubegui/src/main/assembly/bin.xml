@@ -2,7 +2,7 @@
 <assembly>
     <id>all</id>
     <formats>
-        <format>zip</format>
+        <format>jar-with-dependencies</format>
 
         <!--<format>tar.gz</format>-->
         <!--<format>bzip2</format>-->
@@ -13,12 +13,12 @@
             <outputDirectory>/</outputDirectory>
         </file>
     </files>
-    <fileSets>
-        <fileSet>
-            <directory>bin</directory>
-            <outputDirectory>bin</outputDirectory>
-        </fileSet>
-    </fileSets>
+    <!--<fileSets>-->
+        <!--<fileSet>-->
+            <!--<directory>bin</directory>-->
+            <!--<outputDirectory>bin</outputDirectory>-->
+        <!--</fileSet>-->
+    <!--</fileSets>-->
     <dependencySets>
         <dependencySet>
             <useTransitiveDependencies/>

@@ -18,23 +18,20 @@
 
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <configuration>
+                 <configuration>
                     <descriptors>
                         <descriptor>
                             src/main/assembly/bin.xml
                         </descriptor>
                     </descriptors>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.neocoders.nectar3d.examples.cubegui.app.CubeGUIApp</mainClass>
+                        </manifest>
+                    </archive>
                 </configuration>
-                <executions>
-                    <execution>
-                        <id>make-assembly</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>attached</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
