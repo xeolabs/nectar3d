@@ -20,19 +20,19 @@
  * 3. This notice may not be removed or altered from any source
  * distribution.
  */
-package com.neocoders.cubeGui.panel;
-import com.neocoders.nectar3d.scene.TransformGroup;
-import com.neocoders.nectar3d.scene.SceneException;
+package com.neocoders.nectar3d.examples.cubegui.panel;
 
-class XMinSliceExtractionStrategy implements SliceExtractionStrategy {
-    public XMinSliceExtractionStrategy(SliceExtractionContext context, Slice slice) {
+import com.neocoders.nectar3d.scene.TransformGroup;
+
+class XMaxSliceExtractionStrategy implements SliceExtractionStrategy {
+    public XMaxSliceExtractionStrategy(SliceExtractionContext context, Slice slice) {
         this.slice = slice;
         this.context = context;
     }
 
     public void extract() {
         try {
-            /* Set up temporary slice transf
+  /* Set up temporary slice transform
             */
 
             extract = new TransformGroup();
@@ -42,7 +42,7 @@ class XMinSliceExtractionStrategy implements SliceExtractionStrategy {
         */
 
             extract.addTransform(TransformGroup.TRA);
-            context.interpolate(extract, TransformGroup.TRAX_VAL, 0, 800, -EXTRACTION_OFFSET);
+            context.interpolate(extract, TransformGroup.TRAX_VAL, 0, 800, EXTRACTION_OFFSET);
 
         /* Rotate about matrix
         */
@@ -51,12 +51,7 @@ class XMinSliceExtractionStrategy implements SliceExtractionStrategy {
             TransformGroup matrixTransform = context.getMatrixTransform();
             roty = matrixTransform.getAttribute(TransformGroup.ROTY_VAL);
             extract.setAttribute(TransformGroup.ROTY, roty);
-            context.interpolate(extract, TransformGroup.ROTY_VAL, 800, 1600, 90.0);
-
-        /* Final slice orientation when up at front
-        */
-
-            double yRotOrient = (roty > 90) ? 90.0 : (-90.0);
+            context.interpolate(extract, TransformGroup.ROTY_VAL, 800, 1600, 270.0);
             extract.addTransform(TransformGroup.ROTX);
             rotx = matrixTransform.getAttribute(TransformGroup.ROTX_VAL);
             extract.setAttribute(TransformGroup.ROTX, rotx);
@@ -68,14 +63,19 @@ class XMinSliceExtractionStrategy implements SliceExtractionStrategy {
             orient = new TransformGroup();
             orient.setParent(extract);
             orient.addTransform(TransformGroup.ROTY);
-            context.interpolate(orient, TransformGroup.ROTY_VAL, 800, 1600, yRotOrient);
+            if (roty > 270) {
+                context.interpolate(orient, TransformGroup.ROTY_VAL, 800, 1600, 90.0);
+            }
+            else {
+                context.interpolate(orient, TransformGroup.ROTY_VAL, 800, 1600, -90.0);
+            }
 
         /* Transfer cubes from matrix to slice transform
         */
 
             context.graftSlice(slice, orient);
-        } catch (SceneException se) {
-            se.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -106,6 +106,7 @@ class XMinSliceExtractionStrategy implements SliceExtractionStrategy {
 
     private TransformGroup extract;
     private TransformGroup orient;
-    private double roty;
-    private double rotx;
+    double roty;
+    double rotx;
 }
+

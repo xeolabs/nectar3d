@@ -20,19 +20,41 @@
  * 3. This notice may not be removed or altered from any source
  * distribution.
  */
+package com.neocoders.nectar3d.examples.cubegui.applet;
 
+import java.applet.Applet;
+import java.awt.BorderLayout;
 
-package com.neocoders.cubeGui.panel;
+import com.neocoders.nectar3d.examples.cubegui.panel.CubeGUIPanel;
 
-/** Holds data for a GUI cube */
-class CubeData {
-    public CubeData(String label) {
-        this.label = label;
-    }
+public class CubeGUIApplet extends Applet {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6646555695585703184L;
 
-    public String getLabel() {
-        return label;
-    }
+	public void init() {
+		setLayout(new BorderLayout());
+		this.guiPanel = new CubeGUIPanel();
+		add(guiPanel);
+		setSize(400, 400);
+		validate();
+	}
 
-    private String label;
+	public void start() {
+		guiPanel.start();
+		validate();
+	}
+
+	public void stop() {
+	}
+
+	public void destroy() {
+	}
+
+	public String getAppletInfo() {
+		return "Hello, World";
+	}
+
+	private CubeGUIPanel guiPanel;
 }

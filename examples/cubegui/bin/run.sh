@@ -1,1 +1,1 @@
-java -Xms10000000 -cp ../lib com.neocoders.cubeGui.app.CubeGUIApp
+java -Xms10000000 -cp ../lib/*.jar com.neocoders.nectar3d.examples.cubegui.app.CubeGUIApp

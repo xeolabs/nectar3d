@@ -20,7 +20,7 @@
  * 3. This notice may not be removed or altered from any source
  * distribution.
  */
-package com.neocoders.cubeGui.panel;
+package com.neocoders.nectar3d.examples.cubegui.panel;
 import com.neocoders.nectar3d.scene.SceneException;
 import com.neocoders.nectar3d.scene.TransformGroup;
 import com.neocoders.nectar3d.scene.Environment;

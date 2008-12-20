@@ -21,13 +21,13 @@
  * distribution.
  */
 
-package com.neocoders.cubeGui.app;
+package com.neocoders.nectar3d.examples.cubegui.app;
 
 import java.awt.Frame;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 
-import com.neocoders.cubeGui.panel.CubeGUIPanel;
+import com.neocoders.nectar3d.examples.cubegui.panel.CubeGUIPanel;
 
 public class CubeGUIApp {
 	public CubeGUIApp() {

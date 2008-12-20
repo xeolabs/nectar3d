@@ -20,24 +20,20 @@
  * 3. This notice may not be removed or altered from any source
  * distribution.
  */
-package com.neocoders.cubeGui.panel;
-
-import com.neocoders.nectar3d.scene.SceneElement;
-import com.neocoders.nectar3d.scene.Layer;
-import com.neocoders.nectar3d.scene.TransformGroup;
+package com.neocoders.nectar3d.examples.cubegui.panel;
 import com.neocoders.nectar3d.scene.SceneException;
 
-interface SliceExtractionContext {
-    public SceneElement getScene();
+ interface SliceExtractionStrategy {
+    /** Amount by which slice is extracted on it's respective axis */
 
-    public Layer getLayer();
+    public static final int EXTRACTION_OFFSET = 150;
 
-    public TransformGroup getMatrixTransform();
+    /** Extract a slice from a CubeMatrix */
+    public void extract() throws SceneException;
 
-    public TransformGroup getTransformGroup(CubeSelector selector);
+    /** Restore slice previously extracted */
+    public void restore() throws SceneException;
 
-    public void interpolate(TransformGroup tg, int attrID, long i1, long i2, double target) throws SceneException;
-
-    public void graftSlice(Slice slice, SceneElement newParent);
+    /** Remove temporary transforms that were added to scene graph to do extraction and restoration */
+    public void cleanUp();
 }
-

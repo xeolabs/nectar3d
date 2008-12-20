@@ -22,7 +22,7 @@
  */
 
 
-package com.neocoders.cubeGui.panel;
+package com.neocoders.nectar3d.examples.cubegui.panel;
 
 class BuilderException extends Exception {
     /**
