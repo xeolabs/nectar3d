@@ -9,7 +9,7 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>CubeGUI</name>
     <artifactId>nectar3d-cubegui</artifactId>
 

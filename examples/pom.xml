@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<project>
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.neocoders.nectar3d</groupId>
+        <artifactId>nectar3d</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <packaging>pom</packaging>
+    <name>Nectar3D Examples</name>
+    <artifactId>nectar3d-examples</artifactId>
+
+    <modules>
+        <module>cubegui</module>
+    </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.neocoders.nectar3d</groupId>
+            <artifactId>nectar3d-framework</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+ 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.mortbay.jetty</groupId>
+                <artifactId>maven-jetty-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.5</source>
+                    <target>1.5</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

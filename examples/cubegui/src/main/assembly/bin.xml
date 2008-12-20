@@ -13,16 +13,16 @@
             <outputDirectory>/</outputDirectory>
         </file>
     </files>
-    <!--<fileSets>-->
-        <!--<fileSet>-->
-            <!--<directory>bin</directory>-->
-            <!--<outputDirectory>bin</outputDirectory>-->
-        <!--</fileSet>-->
+    <fileSets>
+        <fileSet>
+            <directory>bin</directory>
+            <outputDirectory>bin</outputDirectory>
+        </fileSet>
         <!--<fileSet>-->
             <!--<directory>resources</directory>-->
             <!--<outputDirectory>resources</outputDirectory>-->
         <!--</fileSet>-->
-    <!--</fileSets>-->
+    </fileSets>
     <!--<dependencySets>-->
         <!--<dependencySet>-->
             <!--<useTransitiveDependencies/>-->
