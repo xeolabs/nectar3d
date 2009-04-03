@@ -1,10 +1,10 @@
 <project name="Nectar3D" basedir="../" default="build">
 
 	<!-- Project settings -->
-	<property file="build.properties"/>
+	<property file="${basedir}/ant/build.properties"/>
 
 	<!-- Local system paths -->
-	<property file="ant/build.properties"/>
+	<property file="${basedir}/ant/build.properties"/>
 	<property name="src.dir" value="${basedir}/src"/>
 	<property name="lib.dir" value="${basedir}/lib"/>
 	<property name="classes.dir" value="${basedir}/classes"/>
@@ -13,7 +13,7 @@
 	
 	<!-- classpath -->
    	<path id="compile.classpath">
-		<pathelement path ="${classpath}"/>
+		<pathelement path ="${classes.dir}"/>
 	</path>
 
 	<!-- Remove classes directory for clean build -->
